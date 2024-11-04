@@ -3,7 +3,11 @@
  * This config is used to set up Sanity Studio that's mounted on the `app/(sanity)/studio/[[...tool]]/page.tsx` route
  */
 import { visionTool } from "@sanity/vision";
-import { PluginOptions, defineConfig } from "sanity";
+import {
+  PluginOptions,
+  defineConfig,
+  defineLocaleResourceBundle,
+} from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import {
   presentationTool,
@@ -16,9 +20,8 @@ import { structureTool } from "sanity/structure";
 import { apiVersion, dataset, projectId, studioUrl } from "@/sanity/lib/api";
 import { pageStructure, singletonPlugin } from "@/sanity/plugins/settings";
 import { assistWithPresets } from "@/sanity/plugins/assist";
-import author from "@/sanity/schemas/documents/author";
-import post from "@/sanity/schemas/documents/post";
-import settings from "@/sanity/schemas/singletons/settings";
+import { schema } from "@/sanity/schemas";
+import { settings } from "@/sanity/schemas/singletons/settings";
 import { resolveHref } from "@/sanity/lib/utils";
 
 const homeLocation = {
@@ -43,15 +46,7 @@ export default defineConfig({
   basePath: studioUrl,
   projectId,
   dataset,
-  schema: {
-    types: [
-      // Singletons
-      settings,
-      // Documents
-      post,
-      author,
-    ],
-  },
+  schema,
   plugins: [
     presentationTool({
       resolve: {
@@ -96,4 +91,15 @@ export default defineConfig({
     assistWithPresets(),
     visionTool({ defaultApiVersion: apiVersion }),
   ].filter(Boolean) as PluginOptions[],
+  i18n: {
+    bundles: [
+      {
+        locale: "en-US",
+        namespace: "studio",
+        resources: {
+          "inputs.boolean.disabled": "This toggle is read-only",
+        },
+      },
+    ],
+  },
 });

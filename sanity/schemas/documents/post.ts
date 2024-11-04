@@ -2,7 +2,7 @@ import { DocumentTextIcon } from "@sanity/icons";
 import { format, parseISO } from "date-fns";
 import { defineField, defineType } from "sanity";
 
-import authorType from "./author";
+import { authorType } from "./author";
 
 /**
  * This file is the schema definition for a post.
@@ -16,7 +16,7 @@ import authorType from "./author";
 
  */
 
-export default defineType({
+export const postType = defineType({
   name: "post",
   title: "Post",
   icon: DocumentTextIcon,
