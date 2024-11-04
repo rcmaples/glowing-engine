@@ -26,14 +26,17 @@ const homeLocation = {
   href: "/",
 } satisfies DocumentLocation;
 
-const hostname = window.location.hostname;
-const port = window.location.port;
-let previewBaseURL;
+let previewBaseURL = "";
 
-if (port >= 3000) {
-  previewBaseURL = `http://${hostname}:${port}`;
-} else {
-  previewBaseURL = `https://${hostname}`;
+switch (process.env.NODE_ENV) {
+  case "development":
+    previewBaseURL = "http://localhost:3000";
+    break;
+  case "production":
+    previewBaseURL = "https://glowing-engine.netlify.app";
+    break;
+  default:
+    break;
 }
 
 export default defineConfig({
@@ -88,16 +91,9 @@ export default defineConfig({
       },
     }),
     structureTool({ structure: pageStructure([settings]) }),
-    // Configures the global "new document" button, and document actions, to suit the Settings document singleton
     singletonPlugin([settings.name]),
-    // Add an image asset source for Unsplash
     unsplashImageAsset(),
-    // Sets up AI Assist with preset prompts
-    // https://www.sanity.io/docs/ai-assist
     assistWithPresets(),
-    // Vision lets you query your content with GROQ in the studio
-    // https://www.sanity.io/docs/the-vision-plugin
-    process.env.NODE_ENV === "development" &&
-      visionTool({ defaultApiVersion: apiVersion }),
+    visionTool({ defaultApiVersion: apiVersion }),
   ].filter(Boolean) as PluginOptions[],
 });
