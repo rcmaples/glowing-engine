@@ -26,6 +26,16 @@ const homeLocation = {
   href: "/",
 } satisfies DocumentLocation;
 
+const hostname = window.location.hostname;
+const port = window.location.port;
+let previewBaseURL;
+
+if (port >= 3000) {
+  previewBaseURL = `http://${hostname}:${port}`;
+} else {
+  previewBaseURL = `https://${hostname}`;
+}
+
 export default defineConfig({
   basePath: studioUrl,
   projectId,
@@ -71,7 +81,11 @@ export default defineConfig({
           }),
         },
       },
-      previewUrl: { previewMode: { enable: "/api/draft-mode/enable" } },
+      previewUrl: {
+        previewMode: {
+          enable: `${previewBaseURL}/api/draft-mode/enable`,
+        },
+      },
     }),
     structureTool({ structure: pageStructure([settings]) }),
     // Configures the global "new document" button, and document actions, to suit the Settings document singleton
