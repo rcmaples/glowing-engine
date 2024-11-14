@@ -373,6 +373,13 @@
           "type": "boolean"
         },
         "optional": true
+      },
+      "scratch_file": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },

@@ -1,0 +1,8 @@
+{
+  "version": "v1",
+  "packages": {
+    "sanity-plugin-fancy-pixel": {
+      "signature": "2ad8a76758446486337da6fc05d5154d"
+    }
+  }
+}

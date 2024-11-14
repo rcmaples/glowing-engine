@@ -18,5 +18,13 @@ export const toggleTestType = defineType({
       readOnly: true,
       initialValue: true,
     }),
+    defineField({
+      name: "scratch_file",
+      title: "Scratch file",
+      type: "boolean",
+      readOnly: true,
+      initialValue: true,
+      hidden: true,
+    }),
   ],
 });
