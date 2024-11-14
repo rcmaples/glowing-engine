@@ -1,1 +1,0 @@
-export {fancyPixelPlugin} from './plugin'
