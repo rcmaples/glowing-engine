@@ -1,0 +1,65 @@
+{
+  "name": "sanity-plugin-fancy-pixel",
+  "version": "1.0.0",
+  "description": "Your very own nyan cat.",
+  "keywords": [
+    "sanity",
+    "sanity-plugin"
+  ],
+  "homepage": "https://github.com/rcmaples/fancy-pixel#readme",
+  "bugs": {
+    "url": "https://github.com/rcmaples/fancy-pixel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rcmaples/fancy-pixel.git"
+  },
+  "license": "MIT",
+  "author": "RC Maples <rc@rcmaples.io>",
+  "sideEffects": false,
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "source": "./src/index.ts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "sanity.json",
+    "src",
+    "v2-incompatible.js"
+  ],
+  "scripts": {
+    "build": "plugin-kit verify-package --silent && pkg-utils build --strict --check --clean",
+    "format": "prettier --write --cache --ignore-unknown .",
+    "link-watch": "plugin-kit link-watch",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build",
+    "watch": "pkg-utils watch --strict"
+  },
+  "dependencies": {
+    "@sanity/browserslist-config": "^1.0.3",
+    "@sanity/icons": "^3.4.0",
+    "@sanity/incompatible-plugin": "^1.0.4",
+    "@sanity/plugin-kit": "^4.0.18",
+    "@sanity/ui": "^2.8.22",
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.13"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "sanity": "^3.63.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "browserslist": [
+    "extends @sanity/browserslist-config"
+  ],
+  "yalcSig": "2ad8a76758446486337da6fc05d5154d"
+}

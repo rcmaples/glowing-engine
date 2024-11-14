@@ -76,6 +76,7 @@ export type Toggle_test = {
   _rev: string;
   title?: string;
   is_enabled?: boolean;
+  scratch_file?: boolean;
 };
 
 export type Post = {

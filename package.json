@@ -4,7 +4,7 @@
     "predev": "npm run typegen",
     "dev": "next --turbo",
     "prebuild": "npm run typegen",
-    "build": "next build",
+    "build": "sanity manifest extract --path static && next build",
     "start": "next start",
     "lint": "next lint",
     "presetup": "echo 'about to setup env variables, follow the guide here: https://github.com/vercel/next.js/tree/canary/examples/cms-sanity#using-the-sanity-cli'",
