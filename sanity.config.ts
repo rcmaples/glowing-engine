@@ -26,6 +26,8 @@ import { schema } from '@/sanity/schemas';
 import { settings } from '@/sanity/schemas/singletons/settings';
 import { resolveHref } from '@/sanity/lib/utils';
 
+import CustomNavbar from '@/components/CustomNavbar';
+
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -74,44 +76,49 @@ export default defineConfig({
   schema: {
     types: createReadySchemaTypes,
   },
+  studio: {
+    components: {
+      navbar: CustomNavbar,
+    },
+  },
   plugins: [
-    presentationTool({
-      resolve: {
-        mainDocuments: defineDocuments([
-          {
-            route: '/posts/:slug',
-            filter: `_type == "post" && slug.current == $slug`,
-          },
-        ]),
-        locations: {
-          settings: defineLocations({
-            locations: [homeLocation],
-            message: 'This document is used on all pages',
-            tone: 'caution',
-          }),
-          post: defineLocations({
-            select: {
-              title: 'title',
-              slug: 'slug.current',
-            },
-            resolve: (doc) => ({
-              locations: [
-                {
-                  title: doc?.title || 'Untitled',
-                  href: resolveHref('post', doc?.slug)!,
-                },
-                homeLocation,
-              ],
-            }),
-          }),
-        },
-      },
-      previewUrl: {
-        previewMode: {
-          enable: `${previewBaseURL}/api/draft-mode/enable`,
-        },
-      },
-    }),
+    // presentationTool({
+    //   resolve: {
+    //     mainDocuments: defineDocuments([
+    //       {
+    //         route: '/posts/:slug',
+    //         filter: `_type == "post" && slug.current == $slug`,
+    //       },
+    //     ]),
+    //     locations: {
+    //       settings: defineLocations({
+    //         locations: [homeLocation],
+    //         message: 'This document is used on all pages',
+    //         tone: 'caution',
+    //       }),
+    //       post: defineLocations({
+    //         select: {
+    //           title: 'title',
+    //           slug: 'slug.current',
+    //         },
+    //         resolve: (doc) => ({
+    //           locations: [
+    //             {
+    //               title: doc?.title || 'Untitled',
+    //               href: resolveHref('post', doc?.slug)!,
+    //             },
+    //             homeLocation,
+    //           ],
+    //         }),
+    //       }),
+    //     },
+    //   },
+    //   previewUrl: {
+    //     previewMode: {
+    //       enable: `${previewBaseURL}/api/draft-mode/enable`,
+    //     },
+    //   },
+    // }),
     structureTool({ structure: pageStructure([settings]) }),
     singletonPlugin([settings.name]),
     unsplashImageAsset(),
