@@ -14,27 +14,18 @@ body {
 }
 
 .cat--reverse {
-  transform: scaleX(-100%);
-  animation: flipIt 1s ease-out;
-}
-
-@keyframes flipIt {
-  0% {
-    transform: scaleX(100%);
-    -webkit-transform: scaleX(100%);
-  }
-  100% {
-    transform: scaleX(-100%);
-    -webkit-transform: scaleX(-100%);
-  }
+  transform: scaleX(-1) !important;
 }
 
 .cat-minimal {
   left: 2% !important;
+  transform: scaleX(1);
+  transition: left 1500ms ease-in 1200ms;
 }
 
 .no-rainbow {
-  display: none;
+  opacity: 0 !important;
+  transition: opacity 100ms ease-in !important;
 }
 
 .cat,
@@ -49,7 +40,6 @@ body {
   position: absolute;
   background-repeat: no-repeat;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
   animation-timing-function: step-end;
 }
 ul,
@@ -60,14 +50,13 @@ li {
 }
 
 .overlay {
+  transform: scaleX(1);
   position: absolute;
   left: 338px;
   top: 38px;
   z-index: 100;
-  -webkit-transition: left 2s ease-in-out;
-  -moz-transition: left 2s ease-in-out;
-  -o-transition: left 2s ease-in-out;
-  transition: left 2s ease-in-out;
+  transition:left 1500ms ease-in-out, transform 300ms ease;
+  animation: allow-discrete;
   margin-bottom: 5px;
 }
 
@@ -104,10 +93,10 @@ li {
 @keyframes catCycle {
   0%,
   100% {
-    margin-top: -10px;
+    margin-top: -8px;
   }
   33.3% {
-    margin-top: -9px;
+    margin-top: -6px;
   }
 }
 .poptart {
@@ -1218,13 +1207,14 @@ li {
   }
 }
 .rainbow {
+  opacity: 1;
   left: -100vw;
   right: 50%;
   top: 50%;
   margin-top: -9px;
   height: 19px;
   overflow: hidden;
-  transition: display 1s discrete;
+  transition: opacity 500ms ease-in 100ms;
 }
 .rainbow .sprite {
   left: 0;
