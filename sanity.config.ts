@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 /**
  * This config is used to set up Sanity Studio that's mounted on the `app/(sanity)/studio/[[...tool]]/page.tsx` route
