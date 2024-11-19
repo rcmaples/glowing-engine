@@ -26,5 +26,10 @@ export const toggleTestType = defineType({
       initialValue: true,
       hidden: true,
     }),
+    defineField({
+      name: "happiness_level",
+      title: "Happiness Level",
+      type: "number",
+    }),
   ],
 });

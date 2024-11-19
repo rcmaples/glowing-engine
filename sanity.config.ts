@@ -34,7 +34,7 @@ const homeLocation = {
   href: "/",
 } satisfies DocumentLocation;
 
-let previewBaseURL = "";
+let previewBaseURL = ""
 
 switch (process.env.NODE_ENV) {
   case "development":
