@@ -1,30 +1,41 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType } from 'sanity';
 
 export const toggleTestType = defineType({
-  name: "toggle_test",
-  title: "Toggle Test",
-  type: "document",
+  name: 'toggle_test',
+  title: 'Toggle Test',
+  type: 'document',
   fields: [
     defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
+      name: 'title',
+      title: 'Title',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: "is_enabled",
-      title: "Is enabled?",
-      type: "boolean",
+      name: 'is_enabled',
+      title: 'Is enabled?',
+      type: 'boolean',
       readOnly: true,
       initialValue: true,
     }),
     defineField({
-      name: "scratch_file",
-      title: "Scratch file",
-      type: "boolean",
+      name: 'scratch_file',
+      title: 'Scratch file',
+      type: 'boolean',
       readOnly: true,
       initialValue: true,
       hidden: true,
+    }),
+    defineField({
+      type: 'rangeSlider',
+      name: 'happiness_level',
+      title: 'Happiness level',
+      options: {
+        // suffix: 'px',
+        min: 0,
+        max: 10,
+        steps: 1,
+      },
     }),
   ],
 });

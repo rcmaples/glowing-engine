@@ -326,6 +326,13 @@
     }
   },
   {
+    "name": "rangeSlider",
+    "type": "type",
+    "value": {
+      "type": "number"
+    }
+  },
+  {
     "name": "toggle_test",
     "type": "document",
     "attributes": {
@@ -378,6 +385,14 @@
         "type": "objectAttribute",
         "value": {
           "type": "boolean"
+        },
+        "optional": true
+      },
+      "happiness_level": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "rangeSlider"
         },
         "optional": true
       }
