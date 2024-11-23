@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .SliderRoot {
   position: relative;
   display: flex;
@@ -14,26 +18,6 @@
   flex-grow: 1;
   border-radius: 9999px;
   height: 3px;
-}
-
-.great {
-  background-color: #57bb8a !important;
-}
-
-.good {
-  background-color: #abc978 !important;
-}
-
-.ok {
-  background-color: #ffd666 !important;
-}
-
-.not-good {
-  background-color: #f3a96d !important;
-}
-
-.real-bad {
-  background-color: #e67c73 !important;
 }
 
 .SliderRange {
