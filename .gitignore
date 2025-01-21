@@ -46,4 +46,10 @@ next-env.d.ts
 # Local Netlify folder
 .netlify
 
+# Cursor
+.specstory
+
+# JetBrains
+.idea
+
 .yalc

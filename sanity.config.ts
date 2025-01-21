@@ -1,54 +1,52 @@
 // @ts-nocheck
-"use client";
+'use client';
 /**
  * This config is used to set up Sanity Studio that's mounted on the `app/(sanity)/studio/[[...tool]]/page.tsx` route
  */
-import { visionTool } from "@sanity/vision";
+import { visionTool } from '@sanity/vision';
 import {
   PluginOptions,
   defineConfig,
   defineLocaleResourceBundle,
   SchemaType,
   SchemaTypeDefinition,
-} from "sanity";
-import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
+} from 'sanity';
+import { unsplashImageAsset } from 'sanity-plugin-asset-source-unsplash';
 import {
   presentationTool,
   defineDocuments,
   defineLocations,
   type DocumentLocation,
-} from "sanity/presentation";
-import { structureTool } from "sanity/structure";
+} from 'sanity/presentation';
+import { structureTool } from 'sanity/structure';
 
-import { apiVersion, dataset, projectId, studioUrl } from "@/sanity/lib/api";
-import { pageStructure, singletonPlugin } from "@/sanity/plugins/settings";
-import { assistWithPresets } from "@/sanity/plugins/assist";
-import { schema } from "@/sanity/schemas";
-import { settings } from "@/sanity/schemas/singletons/settings";
-import { resolveHref } from "@/sanity/lib/utils";
-
-import { fancyPixelPlugin } from "sanity-plugin-fancy-pixel";
+import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api';
+import { pageStructure, singletonPlugin } from '@/sanity/plugins/settings';
+import { assistWithPresets } from '@/sanity/plugins/assist';
+import { schema } from '@/sanity/schemas';
+import { settings } from '@/sanity/schemas/singletons/settings';
+import { resolveHref } from '@/sanity/lib/utils';
 
 const homeLocation = {
-  title: "Home",
-  href: "/",
+  title: 'Home',
+  href: '/',
 } satisfies DocumentLocation;
 
-let previewBaseURL = "";
+let previewBaseURL = '';
 
 switch (process.env.NODE_ENV) {
-  case "development":
-    previewBaseURL = "http://localhost:3000";
+  case 'development':
+    previewBaseURL = 'http://localhost:3000';
     break;
-  case "production":
-    previewBaseURL = "https://glowing-engine.netlify.app";
+  case 'production':
+    previewBaseURL = 'https://glowing-engine.netlify.app';
     break;
   default:
-    previewBaseURL = "http://localhost:3000";
+    previewBaseURL = 'http://localhost:3000';
     break;
 }
 
-const CREATE_ENABLED_SCHEMATYPES = ["post"];
+const CREATE_ENABLED_SCHEMATYPES = ['post'];
 
 const createReadySchemaTypes: SchemaTypeDefinition[] = schema.types.map(
   (schemaType: SchemaTypeDefinition): SchemaTypeDefinition => {
@@ -64,7 +62,7 @@ const createReadySchemaTypes: SchemaTypeDefinition[] = schema.types.map(
       };
     }
     return schemaType;
-  },
+  }
 );
 
 export default defineConfig({
@@ -81,16 +79,8 @@ export default defineConfig({
     create: { startInCreateEnabled: true },
   },
 
-  // custom components
-  // studio: {
-  //   components: {
-  //     navbar: CustomNavbar,
-  //   },
-  // },
-
   // plugins
   plugins: [
-    fancyPixelPlugin(),
     structureTool({ structure: pageStructure([settings]) }),
     singletonPlugin([settings.name]),
     unsplashImageAsset(),
@@ -100,26 +90,26 @@ export default defineConfig({
       resolve: {
         mainDocuments: defineDocuments([
           {
-            route: "/posts/:slug",
+            route: '/posts/:slug',
             filter: `_type == "post" && slug.current == $slug`,
           },
         ]),
         locations: {
           settings: defineLocations({
             locations: [homeLocation],
-            message: "This document is used on all pages",
-            tone: "caution",
+            message: 'This document is used on all pages',
+            tone: 'caution',
           }),
           post: defineLocations({
             select: {
-              title: "title",
-              slug: "slug.current",
+              title: 'title',
+              slug: 'slug.current',
             },
             resolve: (doc) => ({
               locations: [
                 {
-                  title: doc?.title || "Untitled",
-                  href: resolveHref("post", doc?.slug)!,
+                  title: doc?.title || 'Untitled',
+                  href: resolveHref('post', doc?.slug)!,
                 },
                 homeLocation,
               ],
@@ -136,7 +126,7 @@ export default defineConfig({
   ].filter(Boolean) as PluginOptions[],
 
   /* Create */
-  studioHost: "https://glowing-engine.sanity.studio",
+  studioHost: 'https://glowing-engine.sanity.studio',
 
   // Override the default i18n resources, see
   // https://linear.app/sanity/issue/SAPP-23 for more information.
