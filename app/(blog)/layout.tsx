@@ -1,22 +1,22 @@
-import "../globals.css";
+import '../globals.css';
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import type { Metadata } from 'next';
 import {
   VisualEditing,
   toPlainText,
   type PortableTextBlock,
-} from "next-sanity";
-import { Inter } from "next/font/google";
-import { draftMode } from "next/headers";
+} from 'next-sanity';
+import { Inter } from 'next/font/google';
+import { draftMode } from 'next/headers';
 
-import AlertBanner from "./alert-banner";
-import PortableText from "./portable-text";
+import AlertBanner from './alert-banner';
+import PortableText from './portable-text';
 
-import * as demo from "@/sanity/lib/demo";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { settingsQuery } from "@/sanity/lib/queries";
-import { resolveOpenGraphImage } from "@/sanity/lib/utils";
+import * as demo from '@/sanity/lib/demo';
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { settingsQuery } from '@/sanity/lib/queries';
+import { resolveOpenGraphImage } from '@/sanity/lib/utils';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await sanityFetch({
@@ -50,9 +50,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
 });
 
 export default async function RootLayout({
@@ -85,14 +85,12 @@ export default async function RootLayout({
                   <div className="flex flex-col items-center justify-center lg:w-1/2 lg:flex-row lg:pl-4">
                     <a
                       href="https://nextjs.org/docs"
-                      className="mx-3 mb-6 border border-black bg-black py-3 px-12 font-bold text-white transition-colors duration-200 hover:bg-white hover:text-black lg:mb-0 lg:px-8"
-                    >
+                      className="mx-3 mb-6 border border-black bg-black py-3 px-12 font-bold text-white transition-colors duration-200 hover:bg-white hover:text-black lg:mb-0 lg:px-8">
                       Read Documentation
                     </a>
                     <a
                       href="https://github.com/vercel/next.js/tree/canary/examples/cms-sanity"
-                      className="mx-3 font-bold hover:underline"
-                    >
+                      className="mx-3 font-bold hover:underline">
                       View on GitHub
                     </a>
                   </div>

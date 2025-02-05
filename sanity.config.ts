@@ -26,7 +26,11 @@ import { assistWithPresets } from '@/sanity/plugins/assist';
 import { schema } from '@/sanity/schemas';
 import { settings } from '@/sanity/schemas/singletons/settings';
 import { resolveHref } from '@/sanity/lib/utils';
-
+import {
+  openEditablePreview,
+  HelloWorldAction,
+  CustomVisualEditingAction,
+} from '@/sanity/lib/actions';
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -124,6 +128,16 @@ export default defineConfig({
       },
     }),
   ].filter(Boolean) as PluginOptions[],
+
+  // Koda
+  // document: {
+  //   productionUrl: (prev, context) => {
+  //     return `${previewBaseURL}/${context.document?._type}s/${context.document?.slug?.current}`;
+  //   },
+  // },
+  document: {
+    actions: [CustomVisualEditingAction, openEditablePreview, HelloWorldAction],
+  },
 
   /* Create */
   studioHost: 'https://glowing-engine.sanity.studio',
