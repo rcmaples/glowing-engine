@@ -26,7 +26,7 @@ import { assistWithPresets } from '@/sanity/plugins/assist';
 import { schema } from '@/sanity/schemas';
 import { settings } from '@/sanity/schemas/singletons/settings';
 import { resolveHref } from '@/sanity/lib/utils';
-
+import { structure } from '@/sanity/structure';
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -82,6 +82,7 @@ export default defineConfig({
   // plugins
   plugins: [
     structureTool({ structure: pageStructure([settings]) }),
+    // structureTool({ structure }),
     singletonPlugin([settings.name]),
     unsplashImageAsset(),
     assistWithPresets(),
