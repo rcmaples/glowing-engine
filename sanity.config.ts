@@ -27,6 +27,10 @@ import { schema } from '@/sanity/schemas';
 import { settings } from '@/sanity/schemas/singletons/settings';
 import { resolveHref } from '@/sanity/lib/utils';
 import { structure } from '@/sanity/structure';
+import { CreateAuthorWithBadgeAction } from '@/sanity/schemas/scratch/createAuthorWithBadgeAction';
+import { NavBarWithAlert } from '@/sanity/components/NavBarWithAlert';
+import { getTemplate } from '@/sanity/schemas/documents/author';
+
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -72,6 +76,32 @@ export default defineConfig({
   dataset,
   schema: {
     types: createReadySchemaTypes,
+    // for s-gg-sla thread
+    templates: getTemplate(),
+  },
+
+  studio: {
+    components: {
+      navbar: NavBarWithAlert,
+    },
+  },
+
+  document: {
+    newDocumentOptions: (prev, { currentUser }) => {
+      const newOptions = prev.filter(
+        (templateItem) => templateItem.templateId == 'author'
+      );
+      return [
+        ...newOptions,
+        {
+          id: 'author-with-badge',
+          templateId: 'author-badge',
+          title: 'Author with Badge',
+          type: 'initialValueTemplateItem',
+          parameters: { badge: 'New' },
+        },
+      ];
+    },
   },
 
   // beta features

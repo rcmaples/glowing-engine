@@ -135,6 +135,7 @@ export type Author = {
     alt?: string;
     _type: "image";
   };
+  badge?: string;
 };
 
 export type Slug = {
