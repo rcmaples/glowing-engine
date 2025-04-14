@@ -19,6 +19,7 @@ import {
   type DocumentLocation,
 } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
+import { media } from 'sanity-plugin-media';
 
 import { apiVersion, dataset, projectId, studioUrl } from '@/sanity/lib/api';
 import { pageStructure, singletonPlugin } from '@/sanity/plugins/settings';
@@ -83,6 +84,7 @@ export default defineConfig({
   plugins: [
     structureTool({ structure: pageStructure([settings]) }),
     // structureTool({ structure }),
+    media(),
     singletonPlugin([settings.name]),
     unsplashImageAsset(),
     assistWithPresets(),
