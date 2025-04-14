@@ -27,6 +27,8 @@ import { schema } from '@/sanity/schemas';
 import { settings } from '@/sanity/schemas/singletons/settings';
 import { resolveHref } from '@/sanity/lib/utils';
 import { structure } from '@/sanity/structure';
+import { nyanBannerPlugin } from 'sanity-plugin-nyan-banner';
+
 const homeLocation = {
   title: 'Home',
   href: '/',
@@ -124,6 +126,7 @@ export default defineConfig({
         },
       },
     }),
+    nyanBannerPlugin(),
   ].filter(Boolean) as PluginOptions[],
 
   /* Create */
