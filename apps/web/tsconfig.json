@@ -1,9 +1,9 @@
 {
   "extends": "../../packages/typescript-config/next.json",
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@packages/*": ["../../packages/*"]
     },
     "resolveJsonModule": true
   },

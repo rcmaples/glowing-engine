@@ -1,8 +1,6 @@
 import {CogIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
-import * as demo from '@/sanity/lib/demo'
-
 export const settings = defineType({
   name: 'settings',
   title: 'Settings',
@@ -14,7 +12,7 @@ export const settings = defineType({
       description: 'This field is the title of your blog.',
       title: 'Title',
       type: 'string',
-      initialValue: demo.title,
+      initialValue: 'Blog Title',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -22,7 +20,7 @@ export const settings = defineType({
       description: 'Used both for the <meta> description tag for SEO, and the blog subheader.',
       title: 'Description',
       type: 'array',
-      initialValue: demo.description,
+      initialValue: ['Blog Description'],
       of: [
         defineArrayMember({
           type: 'block',

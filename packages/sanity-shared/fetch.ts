@@ -1,8 +1,8 @@
-import type { ClientPerspective, QueryParams } from "next-sanity";
-import { draftMode } from "next/headers";
+import type { ClientPerspective, QueryParams } from 'next-sanity';
+import { draftMode } from 'next/headers';
 
-import { client } from "@/sanity/lib/client";
-import { token } from "@/sanity/lib/token";
+import { client } from './client';
+import { token } from './token';
 
 /**
  * Used to fetch data in Server Components, it has built in support for handling Draft Mode and perspectives.
@@ -23,21 +23,21 @@ export async function sanityFetch<const QueryString extends string>({
 }: {
   query: QueryString;
   params?: QueryParams | Promise<QueryParams>;
-  perspective?: Omit<ClientPerspective, "raw">;
+  perspective?: Omit<ClientPerspective, 'raw'>;
   stega?: boolean;
 }) {
   const perspective =
     _perspective || (await draftMode()).isEnabled
-      ? "previewDrafts"
-      : "published";
+      ? 'previewDrafts'
+      : 'published';
   const stega =
     _stega ||
-    perspective === "previewDrafts" ||
-    process.env.VERCEL_ENV === "preview";
-  if (perspective === "previewDrafts") {
+    perspective === 'previewDrafts' ||
+    process.env.VERCEL_ENV === 'preview';
+  if (perspective === 'previewDrafts') {
     return client.fetch(query, await params, {
       stega,
-      perspective: "previewDrafts",
+      perspective: 'previewDrafts',
       // The token is required to fetch draft content
       token,
       // The `previewDrafts` perspective isn't available on the API CDN
@@ -48,7 +48,7 @@ export async function sanityFetch<const QueryString extends string>({
   }
   return client.fetch(query, await params, {
     stega,
-    perspective: "published",
+    perspective: 'published',
     // The `published` perspective is available on the API CDN
     useCdn: true,
     // Only enable Stega in production if it's a Vercel Preview Deployment, as the Vercel Toolbar supports Visual Editing
