@@ -3,13 +3,14 @@ node_modules
 /.pnp
 .pnp.*
 .yarn/*
+.turbo
 
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+.next
+out
 
 # sanity
 /.sanity
