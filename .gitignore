@@ -4,8 +4,7 @@
 =======
 >>>>>>> db69f6e (refactor to barebones monorepo)
 # dependencies
-/node_modules
-/studio/node_modules
+node_modules
 /.pnp
 <<<<<<< HEAD
 .pnp.js
@@ -49,6 +48,7 @@ yarn-error.log*
 =======
 .env*
 *.local
+**/*/.env*
 
 # vercel / netlify
 .vercel
