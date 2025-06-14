@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+=======
+>>>>>>> db69f6e (refactor to barebones monorepo)
 # dependencies
 /node_modules
 /studio/node_modules
 /.pnp
+<<<<<<< HEAD
 .pnp.js
 .yarn/install-state.gz
+=======
+.pnp.*
+.yarn/*
+>>>>>>> db69f6e (refactor to barebones monorepo)
 
 # testing
 /coverage
@@ -15,8 +23,13 @@
 /out/
 
 # sanity
+<<<<<<< HEAD
 /.sanity/
 /dist/
+=======
+/.sanity
+/dist
+>>>>>>> db69f6e (refactor to barebones monorepo)
 
 # misc
 .DS_Store
@@ -28,15 +41,25 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+<<<<<<< HEAD
 .env*.local
 
 # vercel
 .vercel
+=======
+.env*
+*.local
+
+# vercel / netlify
+.vercel
+.netlify
+>>>>>>> db69f6e (refactor to barebones monorepo)
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
+<<<<<<< HEAD
 # Env files created by scripts for working locally
 .env
 .env.local
@@ -53,3 +76,12 @@ next-env.d.ts
 .idea
 
 .yalc
+=======
+# production
+/build
+.pnpm-debug.log*
+
+# Logs
+/logs
+*.log
+>>>>>>> db69f6e (refactor to barebones monorepo)
