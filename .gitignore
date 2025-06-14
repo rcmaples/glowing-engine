@@ -12,14 +12,14 @@ node_modules
 =======
 .pnp.*
 .yarn/*
->>>>>>> db69f6e (refactor to barebones monorepo)
+.turbo
 
 # testing
 /coverage
 
 # next.js
-/.next/
-/out/
+.next
+out
 
 # sanity
 <<<<<<< HEAD

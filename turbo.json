@@ -7,7 +7,7 @@
     "apps/web/.env*",
     "apps/studio/.env*"
   ],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "out/**"]
