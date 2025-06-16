@@ -1,33 +1,29 @@
-import Link from 'next/link';
-import { Suspense } from 'react';
-
-import Avatar from './avatar';
-import CoverImage from './cover-image';
-import DateComponent from './date';
-import MoreStories from './more-stories';
-import Onboarding from './onboarding';
-import PortableText from './portable-text';
-
 // import type { HeroQueryResult } from '@packages/sanity-shared/types';
-import { sanityFetch } from '@packages/sanity-shared/fetch';
-import { heroQuery, settingsQuery } from '@packages/sanity-shared/queries';
+import {sanityFetch} from '@packages/sanity-shared/fetch'
+import {heroQuery, settingsQuery} from '@packages/sanity-shared/queries'
+import Link from 'next/link'
+import {Suspense} from 'react'
 
-function Intro(props: { title: string | null | undefined; description: any }) {
-  const title = props.title || '';
-  const description = props.description?.length ? props.description : '';
+import Avatar from './avatar'
+import CoverImage from './cover-image'
+import DateComponent from './date'
+import MoreStories from './more-stories'
+import Onboarding from './onboarding'
+import PortableText from './portable-text'
+
+function Intro(props: {title: string | null | undefined; description: any}) {
+  const title = props.title || ''
+  const description = props.description?.length ? props.description : ''
   return (
     <section className="mt-16 mb-16 flex flex-col items-center lg:mb-12 lg:flex-row lg:justify-between">
       <h1 className="text-balance text-6xl font-bold leading-tight tracking-tighter lg:pr-8 lg:text-8xl">
         {title || ''}
       </h1>
       <h2 className="text-pretty mt-5 text-center text-lg lg:pl-8 lg:text-left">
-        <PortableText
-          className="prose-lg"
-          value={description?.length ? description : ''}
-        />
+        <PortableText className="prose-lg" value={description?.length ? description : ''} />
       </h2>
     </section>
-  );
+  )
 }
 
 function HeroPost({
@@ -59,16 +55,12 @@ function HeroPost({
           </div>
         </div>
         <div>
-          {excerpt && (
-            <p className="text-pretty mb-4 text-lg leading-relaxed">
-              {excerpt}
-            </p>
-          )}
+          {excerpt && <p className="text-pretty mb-4 text-lg leading-relaxed">{excerpt}</p>}
           {author && <Avatar name={author.name} picture={author.picture} />}
         </div>
       </div>
     </article>
-  );
+  )
 }
 
 export default async function Page() {
@@ -76,8 +68,8 @@ export default async function Page() {
     sanityFetch({
       query: settingsQuery,
     }),
-    sanityFetch({ query: heroQuery }),
-  ]);
+    sanityFetch({query: heroQuery}),
+  ])
 
   return (
     <div className="container mx-auto px-5">
@@ -105,5 +97,5 @@ export default async function Page() {
         </aside>
       )}
     </div>
-  );
+  )
 }

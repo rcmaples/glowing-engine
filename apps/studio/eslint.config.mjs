@@ -1,4 +1,4 @@
 import studio from '@sanity/eslint-config-studio'
-import baseConfig from '@packages/eslint-config/base.js';
+import {baseConfig} from '@workspace/eslint-config/base'
 
-export default [...studio, ...baseConfig];  
+export default [...studio, ...baseConfig]

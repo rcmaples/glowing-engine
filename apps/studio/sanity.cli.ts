@@ -5,5 +5,6 @@ export default defineCliConfig({
     projectId: 'uhpaa149',
     dataset: 'glowing-engine',
   },
+  studioHost: 'glowing-engine',
   autoUpdates: true,
 })

@@ -1,7 +1,7 @@
-import nextConfig from '@packages/eslint-config/next.js';
-import baseConfig from '@packages/eslint-config/base.js';
+import {nextConfig} from '@workspace/eslint-config/next'
+import {baseConfig} from '@workspace/eslint-config/base'
 
-export default [...baseConfig, ...nextConfig];
+export default [...baseConfig, ...nextConfig]
 
 // import { dirname } from 'path';
 // import { fileURLToPath } from 'url';

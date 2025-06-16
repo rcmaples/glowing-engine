@@ -1,8 +1,8 @@
-import type { ClientPerspective, QueryParams } from 'next-sanity';
-import { draftMode } from 'next/headers';
+import type {ClientPerspective, QueryParams} from 'next-sanity'
+import {draftMode} from 'next/headers'
 
-import { client } from './client';
-import { token } from './token';
+import {client} from './client'
+import {token} from './token'
 
 /**
  * Used to fetch data in Server Components, it has built in support for handling Draft Mode and perspectives.
@@ -21,19 +21,13 @@ export async function sanityFetch<const QueryString extends string>({
    */
   stega: _stega,
 }: {
-  query: QueryString;
-  params?: QueryParams | Promise<QueryParams>;
-  perspective?: Omit<ClientPerspective, 'raw'>;
-  stega?: boolean;
+  query: QueryString
+  params?: QueryParams | Promise<QueryParams>
+  perspective?: Omit<ClientPerspective, 'raw'>
+  stega?: boolean
 }) {
-  const perspective =
-    _perspective || (await draftMode()).isEnabled
-      ? 'previewDrafts'
-      : 'published';
-  const stega =
-    _stega ||
-    perspective === 'previewDrafts' ||
-    process.env.VERCEL_ENV === 'preview';
+  const perspective = _perspective || (await draftMode()).isEnabled ? 'previewDrafts' : 'published'
+  const stega = _stega || perspective === 'previewDrafts' || process.env.VERCEL_ENV === 'preview'
   if (perspective === 'previewDrafts') {
     return client.fetch(query, await params, {
       stega,
@@ -43,8 +37,8 @@ export async function sanityFetch<const QueryString extends string>({
       // The `previewDrafts` perspective isn't available on the API CDN
       useCdn: false,
       // And we can't cache the responses as it would slow down the live preview experience
-      next: { revalidate: 0 },
-    });
+      next: {revalidate: 0},
+    })
   }
   return client.fetch(query, await params, {
     stega,
@@ -53,6 +47,6 @@ export async function sanityFetch<const QueryString extends string>({
     useCdn: true,
     // Only enable Stega in production if it's a Vercel Preview Deployment, as the Vercel Toolbar supports Visual Editing
     // When using the `published` perspective we use time-based revalidation to match the time-to-live on Sanity's API CDN (60 seconds)
-    next: { revalidate: 60 },
-  });
+    next: {revalidate: 60},
+  })
 }

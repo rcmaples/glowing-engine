@@ -17,6 +17,7 @@ This monorepo is built with:
 - Remote Turbo caching ready
 
 ## 📂 Directory Structure
+
 ```
 my-monorepo/
 ├── apps/
@@ -59,27 +60,29 @@ pnpm typecheck
 pnpm test
 ```
 
-
 ## 🔧 Monorepo Design Principles
+
 - ✅ Isolated apps & packages
 - ✅ Centralized, versioned config packages:
-    - packages/typescript-config
-    - packages/eslint-config
+  - packages/typescript-config
+  - packages/eslint-config
 - ✅ Flat-config ESLint fully wired
 - ✅ Full ESM-safe imports using exports fields
 - ✅ Turbo pipelines fully incremental
 - ✅ CI pipelines fully cache-aware
 
 ## 📖 Turbo Pipeline Summary
-| Task | Description | 
-| ---- | ----------- |
-| build	| Compiles all apps/packages | 
-| dev | Starts all apps in parallel |
-| lint | Lints all apps/packages |
-| typecheck | Runs TypeScript checks |
-| test | Runs unit tests (future support) | 
+
+| Task      | Description                      |
+| --------- | -------------------------------- |
+| build     | Compiles all apps/packages       |
+| dev       | Starts all apps in parallel      |
+| lint      | Lints all apps/packages          |
+| typecheck | Runs TypeScript checks           |
+| test      | Runs unit tests (future support) |
 
 ## 🔬 Key Turbo Commands
+
 ```shell
 # Run dev for a specific app
 turbo run dev --filter=web
@@ -95,26 +98,32 @@ turbo prune --scope=apps/web --docker
 ```
 
 ## 📝 Adding New Packages
+
 1. Create a new package under packages/
 2. Extend the shared TypeScript config:
+
 ```json
-{ "extends": "../../packages/typescript-config/base.json" }
+{"extends": "../../packages/typescript-config/base.json"}
 ```
 
 3. Add scripts: build, lint, typecheck, test
 4. Turbo will auto-wire dependencies via pnpm workspaces.
 
 ### ⚠ Gotchas
+
 - Do not import across apps directly.
 - All shared code should live inside packages/.
 - Always keep Turbo pipelines consistent across apps/packages.
 
 ## 🔒 Version Pinning
+
 For full reproducibility:
+
 - pnpm version is pinned in root package.json
 - Shared config packages are versioned internally
 
 ## 🏁 Onboarding TLDR
+
 ```shell
 pnpm install
 pnpm dev
@@ -126,6 +135,7 @@ pnpm typecheck
 ✅ That’s all.
 
 ## 🔧 Additional Resources
+
 - [Turborepo Documentation](https://turbo.build/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Sanity Documentation](https://www.sanity.io/docs)

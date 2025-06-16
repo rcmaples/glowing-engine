@@ -1,15 +1,14 @@
-import { Image } from 'next-sanity/image';
-
 // import type { Author } from '@packages/sanity-shared/types';
-import { urlForImage } from '@packages/sanity-shared/utils';
+import {urlForImage} from '@packages/sanity-shared/utils'
+import {Image} from 'next-sanity/image'
 
 interface Props {
-  name: string;
+  name: string
   // picture: Exclude<Author['picture'], undefined> | null;
-  picture: any;
+  picture: any
 }
 
-export default function Avatar({ name, picture }: Props) {
+export default function Avatar({name, picture}: Props) {
   return (
     <div className="flex items-center text-xl">
       {picture?.asset?._ref ? (
@@ -19,13 +18,7 @@ export default function Avatar({ name, picture }: Props) {
             className="h-full rounded-full object-cover"
             height={48}
             width={48}
-            src={
-              urlForImage(picture)
-                ?.height(96)
-                .width(96)
-                .fit('crop')
-                .url() as string
-            }
+            src={urlForImage(picture)?.height(96).width(96).fit('crop').url() as string}
           />
         </div>
       ) : (
@@ -33,5 +26,5 @@ export default function Avatar({ name, picture }: Props) {
       )}
       <div className="text-pretty text-xl font-bold">{name}</div>
     </div>
-  );
+  )
 }

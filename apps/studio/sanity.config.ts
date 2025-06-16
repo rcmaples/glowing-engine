@@ -4,8 +4,8 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './src/schemaTypes'
 
 export default defineConfig({
-  name: 'default',
-  title: 'rcs-sanity-playground',
+  name: 'glowing-engine',
+  title: 'Glowing Engine',
 
   projectId: 'uhpaa149',
   dataset: 'glowing-engine',

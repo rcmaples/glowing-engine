@@ -1,20 +1,20 @@
 // ./packages/eslint-config/next.js
-import js from '@eslint/js';
-import pluginNext from '@next/eslint-plugin-next';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import eslintPluginImport from 'eslint-plugin-import';
-import eslintPluginPrettier from 'eslint-plugin-prettier';
-import pluginReact from 'eslint-plugin-react';
-import pluginReactHooks from 'eslint-plugin-react-hooks';
-import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+// import js from '@eslint/js';
+import pluginNext from '@next/eslint-plugin-next'
+// import eslintConfigPrettier from 'eslint-config-prettier';
+import eslintPluginImport from 'eslint-plugin-import'
+import eslintPluginPrettier from 'eslint-plugin-prettier'
+import pluginReact from 'eslint-plugin-react'
+import pluginReactHooks from 'eslint-plugin-react-hooks'
+import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
-import { config as baseConfig } from './base.js';
+import {baseConfig} from '@workspace/eslint-config/base'
 
-export const nextJsConfig = [
+export const nextConfig = [
   ...baseConfig,
-  { ignores: ['.next', 'out', 'build', 'dist', 'node_modules'] },
+  {ignores: ['.next', 'out', 'build', 'dist', 'node_modules']},
   {
     ...pluginReact.configs.flat.recommended,
     languageOptions: {
@@ -41,7 +41,7 @@ export const nextJsConfig = [
     plugins: {
       'react-hooks': pluginReactHooks,
     },
-    settings: { react: { version: 'detect' } },
+    settings: {react: {version: 'detect'}},
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
       'prettier/prettier': 'error',
@@ -52,4 +52,4 @@ export const nextJsConfig = [
       'react/prop-types': 'off',
     },
   },
-];
+]
