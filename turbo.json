@@ -5,7 +5,8 @@
     "packages/typescript-config/**",
     "packages/eslint-config/**",
     "apps/web/.env*",
-    "apps/studio/.env*"
+    "apps/studio/.env*",
+    "SANITY_API_READ_TOKEN"
   ],
   "ui": "tui",
   "tasks": {
