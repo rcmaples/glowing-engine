@@ -28,6 +28,6 @@ export const baseConfig = [
     },
   },
   {
-    ignores: ['dist/**'],
+    ignores: ['dist/**', 'node_modules', '.sanity'],
   },
 ]
