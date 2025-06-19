@@ -1,9 +1,10 @@
 // import type { HeroQueryResult } from '@packages/sanity-shared/types';
-import {sanityFetch} from '../../lib/sanity/fetch'
-import {heroQuery, settingsQuery} from '../../lib/sanity/queries'
 import Link from 'next/link'
+import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
 
+import {sanityFetch} from '../../lib/sanity/fetch'
+import {heroQuery, settingsQuery} from '../../lib/sanity/queries'
 import Avatar from './avatar'
 import CoverImage from './cover-image'
 import DateComponent from './date'
@@ -11,16 +12,16 @@ import MoreStories from './more-stories'
 import Onboarding from './onboarding'
 import PortableText from './portable-text'
 
-function Intro(props: {title: string | null | undefined; description: any}) {
+function Intro(props: {title: string | null | undefined; description: PortableTextBlock[]}) {
   const title = props.title || ''
-  const description = props.description?.length ? props.description : ''
+  const description = props.description || []
   return (
     <section className="mt-16 mb-16 flex flex-col items-center lg:mb-12 lg:flex-row lg:justify-between">
       <h1 className="text-balance text-6xl font-bold leading-tight tracking-tighter lg:pr-8 lg:text-8xl">
         {title || ''}
       </h1>
       <h2 className="text-pretty mt-5 text-center text-lg lg:pl-8 lg:text-left">
-        <PortableText className="prose-lg" value={description?.length ? description : ''} />
+        <PortableText className="prose-lg" value={description} />
       </h2>
     </section>
   )
@@ -35,7 +36,14 @@ function HeroPost({
   author,
 }: Pick<
   // Exclude<HeroQueryResult, null>,
-  any,
+  {
+    title: string
+    coverImage: {asset?: {_ref?: string}; alt?: string}
+    date: string
+    excerpt: string
+    author: {name: string; picture: {asset?: {_ref?: string}; alt?: string}}
+    slug: string
+  },
   'title' | 'coverImage' | 'date' | 'excerpt' | 'author' | 'slug'
 >) {
   return (

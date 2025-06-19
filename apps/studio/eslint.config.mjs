@@ -9,7 +9,7 @@ export default [
   ...studio,
   ...baseConfig,
   {
-    ignores: ['node_modules', '.sanity', 'eslint.config.mjs'],
+    ignores: ['node_modules', '.sanity', 'eslint.config.mjs', 'sanity.types.ts'],
     plugins: {
       prettier: prettierPlugin,
       'simple-import-sort': simpleImportSort,

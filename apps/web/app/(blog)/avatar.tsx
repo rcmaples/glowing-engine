@@ -5,7 +5,7 @@ import {urlForImage} from '@/lib/sanity/utils'
 interface Props {
   name: string
   // picture: Exclude<Author['picture'], undefined> | null;
-  picture: any
+  picture: {asset?: {_ref?: string}; alt?: string}
 }
 
 export default function Avatar({name, picture}: Props) {

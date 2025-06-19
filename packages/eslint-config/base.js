@@ -19,7 +19,13 @@ export const baseConfig = [
       turbo: turboPlugin,
     },
     rules: {
-      'turbo/no-undeclared-env-vars': 'warn',
+      'turbo/no-undeclared-env-vars': [
+        'warn',
+        {
+          cwd: '../../',
+          allowList: ['SANITY_API_READ_TOKEN', 'VERCEL_ENV'],
+        },
+      ],
     },
   },
   {
@@ -28,6 +34,6 @@ export const baseConfig = [
     },
   },
   {
-    ignores: ['dist/**', 'node_modules', '.sanity'],
+    ignores: ['dist/**', 'node_modules', '.sanity', '**/sanity.types.ts'],
   },
 ]
