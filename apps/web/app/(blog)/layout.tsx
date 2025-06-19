@@ -1,8 +1,8 @@
 import '../globals.css'
 
-import {sanityFetch} from '@packages/sanity-shared/fetch'
-import {settingsQuery} from '@packages/sanity-shared/queries'
-import {resolveOpenGraphImage} from '@packages/sanity-shared/utils'
+import {sanityFetch} from '../../lib/sanity/fetch'
+import {settingsQuery} from '../../lib/sanity/queries'
+import {resolveOpenGraphImage} from '../../lib/sanity/utils'
 import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'

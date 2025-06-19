@@ -1,7 +1,7 @@
 // import type { Author } from '@packages/sanity-shared/types';
-import {urlForImage} from '@packages/sanity-shared/utils'
 import {Image} from 'next-sanity/image'
 
+import {urlForImage} from '@/lib/sanity/utils'
 interface Props {
   name: string
   // picture: Exclude<Author['picture'], undefined> | null;

@@ -1,6 +1,6 @@
 // import type { HeroQueryResult } from '@packages/sanity-shared/types';
-import {sanityFetch} from '@packages/sanity-shared/fetch'
-import {heroQuery, settingsQuery} from '@packages/sanity-shared/queries'
+import {sanityFetch} from '../../lib/sanity/fetch'
+import {heroQuery, settingsQuery} from '../../lib/sanity/queries'
 import Link from 'next/link'
 import {Suspense} from 'react'
 

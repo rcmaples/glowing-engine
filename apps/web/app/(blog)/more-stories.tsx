@@ -1,5 +1,5 @@
-import {sanityFetch} from '@packages/sanity-shared/fetch'
-import {moreStoriesQuery} from '@packages/sanity-shared/queries'
+import {sanityFetch} from '../../lib/sanity/fetch'
+import {moreStoriesQuery} from '../../lib/sanity/queries'
 import Link from 'next/link'
 
 import Avatar from './avatar'
