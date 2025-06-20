@@ -20,8 +20,10 @@
   "dependencies": {
     "@sanity/assist": "^4.3.0",
     "@sanity/icons": "^3.7.0",
+    "@sanity/ui": "^2.8.28",
     "@sanity/vision": "^3.93.0",
     "date-fns": "^4.1.0",
+    "openai": "^4.0.0",
     "react": "^19.1",
     "react-dom": "^19.1",
     "sanity": "^3.93.0",

@@ -3,6 +3,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 
 import {schemaTypes} from './src/schemaTypes'
+import {groqAssistant} from './src/plugins/groq-assistant'
 
 export default defineConfig({
   name: 'glowing-engine',
@@ -11,7 +12,7 @@ export default defineConfig({
   projectId: 'uhpaa149',
   dataset: 'glowing-engine',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool(), visionTool(), groqAssistant()],
 
   schema: {
     types: schemaTypes,
