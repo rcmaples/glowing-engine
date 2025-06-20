@@ -1,0 +1,57 @@
+import {visionTool} from '@sanity/vision'
+import React, {useState} from 'react'
+
+import GroqAssistant from './GroqAssistant'
+
+export const VisionWithAssistant = () => {
+  const [generatedQuery, setGeneratedQuery] = useState('')
+
+  const handleQueryGenerated = (query: string) => {
+    setGeneratedQuery(query)
+  }
+
+  return (
+    <div style={{height: '100vh', display: 'flex', flexDirection: 'column'}}>
+      <div style={{flexShrink: 0}}>
+        <GroqAssistant onQueryGenerated={handleQueryGenerated} />
+        {generatedQuery && (
+          <div
+            style={{
+              margin: '0 1rem 1rem 1rem',
+              padding: '1rem',
+              backgroundColor: '#f5f5f5',
+              borderRadius: '4px',
+              fontFamily: 'monospace',
+              fontSize: '0.875rem',
+            }}
+          >
+            <div style={{fontWeight: 'bold', marginBottom: '0.5rem', fontFamily: 'sans-serif'}}>
+              Generated Query:
+            </div>
+            <div style={{marginBottom: '0.5rem', wordBreak: 'break-all'}}>{generatedQuery}</div>
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(generatedQuery)
+                // You could add a toast notification here
+              }}
+              style={{
+                padding: '0.25rem 0.5rem',
+                fontSize: '0.75rem',
+                backgroundColor: '#0066cc',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer',
+              }}
+            >
+              Copy to Clipboard
+            </button>
+          </div>
+        )}
+      </div>
+      <div style={{flex: 1, minHeight: 0}}>
+        <Vision />
+      </div>
+    </div>
+  )
+}
