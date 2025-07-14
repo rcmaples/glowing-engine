@@ -1,5 +1,6 @@
-import { definePlugin } from 'sanity'
-import { SearchIcon } from '@sanity/icons'
+import {SearchIcon} from '@sanity/icons'
+import {definePlugin} from 'sanity'
+
 import GroqAssistantTool from './GroqAssistant'
 
 export const groqAssistant = definePlugin(() => {

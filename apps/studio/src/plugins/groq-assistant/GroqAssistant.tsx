@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Card, Stack, Text, TextInput, Button, Box, Code } from '@sanity/ui'
-import { SearchIcon } from '@sanity/icons'
+import {SearchIcon} from '@sanity/icons'
+import {Box, Button, Card, Code, Stack, Text, TextInput} from '@sanity/ui'
+import React, {useState} from 'react'
 
 export default function GroqAssistantTool() {
   const [input, setInput] = useState('')
@@ -10,18 +10,18 @@ export default function GroqAssistantTool() {
 
   async function generate() {
     if (!input.trim()) return
-    
+
     setLoading(true)
     setError('')
 
     try {
       // Use environment variable to determine API endpoint
       const apiEndpoint = process.env.SANITY_STUDIO_API_URL || 'http://localhost:3000'
-      
+
       const res = await fetch(`${apiEndpoint}/api/groq-inference`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({prompt: input}),
       })
 
       if (!res.ok) {
@@ -71,7 +71,7 @@ export default function GroqAssistantTool() {
               }
             }}
           />
-          
+
           <Button
             tone="primary"
             loading={loading}
@@ -93,18 +93,18 @@ export default function GroqAssistantTool() {
               <Text size={2} weight="semibold">
                 Generated Query:
               </Text>
-              
-              <Box style={{ fontFamily: 'monospace' }}>
+
+              <Box style={{fontFamily: 'monospace'}}>
                 <Code size={1}>{generatedQuery}</Code>
               </Box>
-              
+
               <Button
                 mode="ghost"
                 tone="primary"
                 text="Copy to Clipboard"
                 onClick={copyToClipboard}
               />
-              
+
               <Card padding={2} tone="caution" radius={1}>
                 <Text size={1}>
                   💡 Copy this query and paste it into the Vision tool to test it
