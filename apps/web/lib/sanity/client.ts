@@ -1,7 +1,8 @@
 import {createClient} from 'next-sanity'
 
-import {apiVersion, dataset, projectId, studioUrl} from './api'
+import {apiVersion, dataset, projectId, readToken, studioUrl} from './api'
 
+// Published content client
 export const client = createClient({
   projectId,
   dataset,
@@ -10,13 +11,20 @@ export const client = createClient({
   perspective: 'published',
   stega: {
     studioUrl,
-    logger: console,
-    filter: (props) => {
-      if (props.sourcePath.at(-1) === 'title') {
-        return true
-      }
+    enabled: false,
+  },
+})
 
-      return props.filterDefault(props)
-    },
+// Draft content client with token and stega enabled
+export const clientWithToken = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: readToken,
+  perspective: 'previewDrafts',
+  stega: {
+    studioUrl,
+    enabled: true,
   },
 })
