@@ -4,11 +4,12 @@ import {SpeedInsights} from '@vercel/speed-insights/next'
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import {draftMode} from 'next/headers'
-import {type PortableTextBlock, toPlainText, VisualEditing} from 'next-sanity'
+import {type PortableTextBlock, toPlainText} from 'next-sanity'
 
 import {sanityFetch} from '../../lib/sanity/fetch'
 import {settingsQuery} from '../../lib/sanity/queries'
 import {resolveOpenGraphImage} from '../../lib/sanity/utils'
+import VisualEditingProvider from '../components/visual-editing'
 import AlertBanner from './alert-banner'
 import PortableText from './portable-text'
 
@@ -59,6 +60,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
       <body>
         <section className="min-h-screen">
           {isDraftMode && <AlertBanner />}
+          <VisualEditingProvider />
           <main>{children}</main>
           <footer className="bg-accent-1 border-accent-2 border-t">
             <div className="container mx-auto px-5">
@@ -91,7 +93,6 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             </div>
           </footer>
         </section>
-        {isDraftMode && <VisualEditing />}
         <SpeedInsights />
       </body>
     </html>

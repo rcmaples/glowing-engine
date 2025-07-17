@@ -1,8 +1,7 @@
 import {draftMode} from 'next/headers'
 import type {ClientPerspective, QueryParams} from 'next-sanity'
 
-import {client} from './client'
-import {token} from './token'
+import {client, clientWithToken} from './client'
 
 export async function sanityFetch<const QueryString extends string>({
   query,
@@ -15,19 +14,21 @@ export async function sanityFetch<const QueryString extends string>({
   perspective?: Omit<ClientPerspective, 'raw'>
   stega?: boolean
 }) {
-  const perspective = _perspective || (await draftMode()).isEnabled ? 'previewDrafts' : 'published'
-  const stega = _stega || perspective === 'previewDrafts' || process.env.VERCEL_ENV === 'preview'
+  const isDraftMode = (await draftMode()).isEnabled
+  const perspective = _perspective || isDraftMode ? 'previewDrafts' : 'published'
+  // const stega = _stega ?? isDraftMode
+
   if (perspective === 'previewDrafts') {
-    return client.fetch(query, await params, {
-      stega,
+    return clientWithToken.fetch(query, await params, {
+      stega: true,
       perspective: 'previewDrafts',
-      token,
       useCdn: false,
       next: {revalidate: 0},
     })
   }
+
   return client.fetch(query, await params, {
-    stega,
+    stega: false,
     perspective: 'published',
     useCdn: true,
     next: {revalidate: 60},

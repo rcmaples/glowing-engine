@@ -23,7 +23,27 @@ export const baseConfig = [
         'warn',
         {
           cwd: '../../',
-          allowList: ['SANITY_API_READ_TOKEN', 'VERCEL_ENV'],
+          allowList: [
+            'SANITY_API_READ_TOKEN',
+            'VERCEL_ENV',
+            'NODE_ENV',
+            'SANITY_STUDIO_PREVIEW_URL',
+            'SANITY_READ_TOKEN',
+          ],
+        },
+      ],
+      'no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+        },
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
         },
       ],
     },

@@ -5,6 +5,7 @@ import {defineQuery} from 'next-sanity'
 import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
 
+import {client} from '../../../../lib/sanity/client'
 import {sanityFetch} from '../../../../lib/sanity/fetch'
 import {postQuery, settingsQuery} from '../../../../lib/sanity/queries'
 import {resolveOpenGraphImage} from '../../../../lib/sanity/utils'
@@ -21,22 +22,14 @@ type Props = {
 const postSlugs = defineQuery(`*[_type == "post" && defined(slug.current)]{"slug": slug.current}`)
 
 export async function generateStaticParams() {
-  return await sanityFetch({
-    query: postSlugs,
-    perspective: 'published',
-    stega: false,
-  })
+  return await client.fetch(postSlugs)
 }
 
 export async function generateMetadata(
   {params}: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  const post = await sanityFetch({
-    query: postQuery,
-    params,
-    stega: false,
-  })
+  const post = await client.fetch(postQuery, await params)
   const previousImages = (await parent).openGraph?.images || []
   const ogImage = resolveOpenGraphImage(post?.coverImage)
 

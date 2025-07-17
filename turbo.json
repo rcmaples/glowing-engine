@@ -7,7 +7,17 @@
     "apps/web/.env*",
     "apps/studio/.env*"
   ],
-  "globalEnv": ["SANITY_API_READ_TOKEN", "VERCEL_ENV"],
+  "globalEnv": [
+    "SANITY_API_READ_TOKEN",
+    "SANITY_READ_TOKEN",
+    "NEXT_PUBLIC_SANITY_PROJECT_ID",
+    "NEXT_PUBLIC_SANITY_DATASET",
+    "NEXT_PUBLIC_SANITY_API_VERSION",
+    "NEXT_PUBLIC_SANITY_STUDIO_URL",
+    "SANITY_STUDIO_PREVIEW_URL",
+    "NODE_ENV",
+    "VERCEL_ENV"
+  ],
   "ui": "tui",
   "tasks": {
     "build": {

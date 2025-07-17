@@ -1,4 +1,3 @@
-// import type { HeroQueryResult } from '@packages/sanity-shared/types';
 import Link from 'next/link'
 import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
@@ -9,7 +8,6 @@ import Avatar from './avatar'
 import CoverImage from './cover-image'
 import DateComponent from './date'
 import MoreStories from './more-stories'
-import Onboarding from './onboarding'
 import PortableText from './portable-text'
 
 function Intro(props: {title: string | null | undefined; description: PortableTextBlock[]}) {
@@ -83,17 +81,17 @@ export default async function Page() {
     <div className="container mx-auto px-5">
       <Intro title={settings?.title} description={settings?.description} />
       {heroPost ? (
-        <HeroPost
-          title={heroPost.title}
-          slug={heroPost.slug}
-          coverImage={heroPost.coverImage}
-          excerpt={heroPost.excerpt}
-          date={heroPost.date}
-          author={heroPost.author}
-        />
-      ) : (
-        <Onboarding />
-      )}
+        <>
+          <HeroPost
+            title={heroPost.title}
+            slug={heroPost.slug}
+            coverImage={heroPost.coverImage}
+            excerpt={heroPost.excerpt}
+            date={heroPost.date}
+            author={heroPost.author}
+          />
+        </>
+      ) : null}
       {heroPost?._id && (
         <aside>
           <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">

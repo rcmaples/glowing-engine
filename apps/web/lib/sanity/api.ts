@@ -18,4 +18,6 @@ export const projectId = assertValue(
 
 export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2024-02-28'
 
-export const studioUrl = '/studio'
+export const studioUrl = process.env.NEXT_PUBLIC_SANITY_STUDIO_URL || 'http://localhost:3333'
+
+export const readToken = process.env.SANITY_READ_TOKEN
