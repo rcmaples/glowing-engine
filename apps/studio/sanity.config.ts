@@ -3,6 +3,7 @@ import {defineConfig} from 'sanity'
 import {presentationTool} from 'sanity/presentation'
 import {structureTool} from 'sanity/structure'
 
+import {groqAssistant} from './src/plugins/groq-assistant'
 import {locate, mainDocuments} from './src/presentation/locate'
 import {schemaTypes} from './src/schemaTypes'
 
@@ -33,6 +34,7 @@ export default defineConfig({
       allowOrigins: ['http://localhost:3000', 'https://glowing-engine-web.vercel.app'],
     }),
     visionTool(),
+    groqAssistant(),
   ],
 
   schema: {

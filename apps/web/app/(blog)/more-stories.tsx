@@ -10,7 +10,7 @@ import DateComponent from './date'
 
 export default async function MoreStories(params: {skip: string; limit: number}) {
   let data
-  
+
   try {
     const result = await liveSanityFetch({query: moreStoriesQuery, params})
     data = result.data
