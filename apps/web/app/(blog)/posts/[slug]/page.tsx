@@ -5,15 +5,17 @@ import {defineQuery} from 'next-sanity'
 import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
 
-import {client} from '../../../../lib/sanity/client'
-import {sanityFetch} from '../../../../lib/sanity/fetch'
-import {postQuery, settingsQuery} from '../../../../lib/sanity/queries'
-import {resolveOpenGraphImage} from '../../../../lib/sanity/utils'
-import Avatar from '../../avatar'
-import CoverImage from '../../cover-image'
-import DateComponent from '../../date'
-import MoreStories from '../../more-stories'
-import PortableText from '../../portable-text'
+import Avatar from '@/app/(blog)/avatar'
+import CoverImage from '@/app/(blog)/cover-image'
+import DateComponent from '@/app/(blog)/date'
+import MoreStories from '@/app/(blog)/more-stories'
+import PortableText from '@/app/(blog)/portable-text'
+
+import {client} from '@/lib/sanity/client'
+import {sanityFetch} from '@/lib/sanity/fetch'
+import {liveSanityFetch} from '@/lib/sanity/live'
+import {postQuery, settingsQuery} from '@/lib/sanity/queries'
+import {resolveOpenGraphImage} from '@/lib/sanity/utils'
 
 type Props = {
   params: Promise<{slug: string}>
@@ -44,10 +46,25 @@ export async function generateMetadata(
 }
 
 export default async function PostPage({params}: Props) {
-  const [post, settings] = await Promise.all([
-    sanityFetch({query: postQuery, params}),
-    sanityFetch({query: settingsQuery}),
-  ])
+  let post, settings
+  
+  try {
+    const [{data: postData}, {data: settingsData}] = await Promise.all([
+      liveSanityFetch({query: postQuery, params}),
+      liveSanityFetch({query: settingsQuery}),
+    ])
+    post = postData
+    settings = settingsData
+  } catch (error) {
+    console.error('Live fetch failed for post page, falling back to regular fetch:', error)
+    // Fallback to regular fetch
+    const [postData, settingsData] = await Promise.all([
+      sanityFetch({query: postQuery, params}),
+      sanityFetch({query: settingsQuery}),
+    ])
+    post = postData
+    settings = settingsData
+  }
 
   if (!post?._id) {
     return notFound()

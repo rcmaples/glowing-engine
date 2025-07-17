@@ -1,7 +1,7 @@
 import {draftMode} from 'next/headers'
 import type {ClientPerspective, QueryParams} from 'next-sanity'
 
-import {client, clientWithToken} from './client'
+import {client, presentationClient} from './client'
 
 export async function sanityFetch<const QueryString extends string>({
   query,
@@ -19,7 +19,7 @@ export async function sanityFetch<const QueryString extends string>({
   // const stega = _stega ?? isDraftMode
 
   if (perspective === 'previewDrafts') {
-    return clientWithToken.fetch(query, await params, {
+    return presentationClient.fetch(query, await params, {
       stega: true,
       perspective: 'previewDrafts',
       useCdn: false,

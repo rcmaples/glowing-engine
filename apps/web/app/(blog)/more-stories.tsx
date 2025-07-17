@@ -1,13 +1,24 @@
 import Link from 'next/link'
 
-import {sanityFetch} from '../../lib/sanity/fetch'
-import {moreStoriesQuery} from '../../lib/sanity/queries'
+import {sanityFetch} from '@/lib/sanity/fetch'
+import {liveSanityFetch} from '@/lib/sanity/live'
+import {moreStoriesQuery} from '@/lib/sanity/queries'
+
 import Avatar from './avatar'
 import CoverImage from './cover-image'
 import DateComponent from './date'
 
 export default async function MoreStories(params: {skip: string; limit: number}) {
-  const data = await sanityFetch({query: moreStoriesQuery, params})
+  let data
+  
+  try {
+    const result = await liveSanityFetch({query: moreStoriesQuery, params})
+    data = result.data
+  } catch (error) {
+    console.error('Live fetch failed for more stories, falling back to regular fetch:', error)
+    // Fallback to regular fetch
+    data = await sanityFetch({query: moreStoriesQuery, params})
+  }
 
   return (
     <>

@@ -6,9 +6,11 @@ import {Inter} from 'next/font/google'
 import {draftMode} from 'next/headers'
 import {type PortableTextBlock, toPlainText} from 'next-sanity'
 
-import {sanityFetch} from '../../lib/sanity/fetch'
-import {settingsQuery} from '../../lib/sanity/queries'
-import {resolveOpenGraphImage} from '../../lib/sanity/utils'
+import {sanityFetch} from '@/lib/sanity/fetch'
+import {liveSanityFetch, SanityLive} from '@/lib/sanity/live'
+import {settingsQuery} from '@/lib/sanity/queries'
+import {resolveOpenGraphImage} from '@/lib/sanity/utils'
+
 import VisualEditingProvider from '../components/visual-editing'
 import AlertBanner from './alert-banner'
 import PortableText from './portable-text'
@@ -51,7 +53,17 @@ const inter = Inter({
 })
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
-  const data = await sanityFetch({query: settingsQuery})
+  let data
+  
+  try {
+    const result = await liveSanityFetch({query: settingsQuery})
+    data = result.data
+  } catch (error) {
+    console.error('Live fetch failed for layout, falling back to regular fetch:', error)
+    // Fallback to regular fetch
+    data = await sanityFetch({query: settingsQuery})
+  }
+  
   const footer = data?.footer || []
   const {isEnabled: isDraftMode} = await draftMode()
 
@@ -93,6 +105,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             </div>
           </footer>
         </section>
+        <SanityLive />
         <SpeedInsights />
       </body>
     </html>
