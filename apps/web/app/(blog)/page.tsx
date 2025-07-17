@@ -2,8 +2,10 @@ import Link from 'next/link'
 import {type PortableTextBlock} from 'next-sanity'
 import {Suspense} from 'react'
 
-import {sanityFetch} from '../../lib/sanity/fetch'
-import {heroQuery, settingsQuery} from '../../lib/sanity/queries'
+import {sanityFetch} from '@/lib/sanity/fetch'
+import {liveSanityFetch} from '@/lib/sanity/live'
+import {heroQuery, settingsQuery} from '@/lib/sanity/queries'
+
 import Avatar from './avatar'
 import CoverImage from './cover-image'
 import DateComponent from './date'
@@ -70,12 +72,27 @@ function HeroPost({
 }
 
 export default async function Page() {
-  const [settings, heroPost] = await Promise.all([
-    sanityFetch({
-      query: settingsQuery,
-    }),
-    sanityFetch({query: heroQuery}),
-  ])
+  let settings, heroPost
+  
+  try {
+    const [{data: settingsData}, {data: heroPostData}] = await Promise.all([
+      liveSanityFetch({
+        query: settingsQuery,
+      }),
+      liveSanityFetch({query: heroQuery}),
+    ])
+    settings = settingsData
+    heroPost = heroPostData
+  } catch (error) {
+    console.error('Live fetch failed, falling back to regular fetch:', error)
+    // Fallback to regular fetch
+    const [settingsData, heroPostData] = await Promise.all([
+      sanityFetch({query: settingsQuery}),
+      sanityFetch({query: heroQuery}),
+    ])
+    settings = settingsData
+    heroPost = heroPostData
+  }
 
   return (
     <div className="container mx-auto px-5">

@@ -16,7 +16,7 @@ export const client = createClient({
 })
 
 // Draft content client with token and stega enabled
-export const clientWithToken = createClient({
+export const presentationClient = createClient({
   projectId,
   dataset,
   apiVersion,
