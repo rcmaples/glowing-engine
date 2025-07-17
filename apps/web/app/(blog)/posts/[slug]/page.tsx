@@ -10,7 +10,6 @@ import CoverImage from '@/app/(blog)/cover-image'
 import DateComponent from '@/app/(blog)/date'
 import MoreStories from '@/app/(blog)/more-stories'
 import PortableText from '@/app/(blog)/portable-text'
-
 import {client} from '@/lib/sanity/client'
 import {sanityFetch} from '@/lib/sanity/fetch'
 import {liveSanityFetch} from '@/lib/sanity/live'
@@ -47,7 +46,7 @@ export async function generateMetadata(
 
 export default async function PostPage({params}: Props) {
   let post, settings
-  
+
   try {
     const [{data: postData}, {data: settingsData}] = await Promise.all([
       liveSanityFetch({query: postQuery, params}),

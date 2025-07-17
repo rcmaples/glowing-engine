@@ -2,7 +2,7 @@ import {SearchIcon} from '@sanity/icons'
 import {Box, Button, Card, Code, Stack, Text, TextInput} from '@sanity/ui'
 import React, {useState} from 'react'
 
-export default function GroqAssistantTool() {
+export const GroqAssistantTool = () => {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [generatedQuery, setGeneratedQuery] = useState('')

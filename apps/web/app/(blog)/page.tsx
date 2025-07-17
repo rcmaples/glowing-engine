@@ -73,7 +73,7 @@ function HeroPost({
 
 export default async function Page() {
   let settings, heroPost
-  
+
   try {
     const [{data: settingsData}, {data: heroPostData}] = await Promise.all([
       liveSanityFetch({

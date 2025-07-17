@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server'
+import {createClient} from '@sanity/client'
+import type {NextRequest} from 'next/server'
+import {NextResponse} from 'next/server'
 import OpenAI from 'openai'
-import { createClient } from '@sanity/client'
 
 // CORS configuration
 const corsHeaders = {
@@ -10,7 +11,7 @@ const corsHeaders = {
 }
 
 // Handle preflight requests
-export async function OPTIONS(request: NextRequest) {
+export async function OPTIONS(_request: NextRequest) {
   return new Response(null, {
     status: 200,
     headers: corsHeaders,
@@ -18,7 +19,7 @@ export async function OPTIONS(request: NextRequest) {
 }
 
 // Create Sanity client
-function createSanityClient(projectId: string) {
+function createSanityClient(projectId: string | undefined) {
   return createClient({
     projectId,
     dataset: 'glowing-engine', // Use your dataset name
@@ -28,7 +29,7 @@ function createSanityClient(projectId: string) {
 }
 
 // Get basic schema information from existing documents
-async function getSchemaFromDocuments(client: any) {
+async function getSchemaFromDocuments(client: ReturnType<typeof createSanityClient>) {
   try {
     // Query for different document types and their structure
     const documentTypes = await client.fetch(`
@@ -42,7 +43,7 @@ async function getSchemaFromDocuments(client: any) {
         }
       }
     `)
-    
+
     return documentTypes.types || []
   } catch (error) {
     console.warn('Could not fetch schema from documents:', error)
@@ -50,26 +51,53 @@ async function getSchemaFromDocuments(client: any) {
     return [
       {
         name: 'document',
-        fields: ['_id', '_type', '_rev', '_createdAt', '_updatedAt', 'title', 'slug', 'description', 'content', 'publishedAt', 'author']
+        fields: [
+          '_id',
+          '_type',
+          '_rev',
+          '_createdAt',
+          '_updatedAt',
+          'title',
+          'slug',
+          'description',
+          'content',
+          'publishedAt',
+          'author',
+        ],
       },
       {
         name: 'post',
-        fields: ['title', 'slug', 'author', 'mainImage', 'categories', 'publishedAt', 'body', 'excerpt']
+        fields: [
+          'title',
+          'slug',
+          'author',
+          'mainImage',
+          'categories',
+          'publishedAt',
+          'body',
+          'excerpt',
+        ],
       },
       {
         name: 'author',
-        fields: ['name', 'slug', 'image', 'bio']
+        fields: ['name', 'slug', 'image', 'bio'],
       },
       {
         name: 'category',
-        fields: ['title', 'description']
-      }
+        fields: ['title', 'description'],
+      },
     ]
   }
 }
 
+// Define schema type structure
+type SchemaType = {
+  name: string
+  fields: string[]
+}
+
 // Prompt builder
-function buildPrompt(userRequest: string, schemaTypes: any[]) {
+function buildPrompt(userRequest: string, schemaTypes: SchemaType[]) {
   return `
 You are an expert in writing Sanity GROQ queries.
 
@@ -100,19 +128,19 @@ ${userRequest}
 `
 }
 
-const openai = new OpenAI({ 
-  apiKey: process.env.OPENAI_API_KEY 
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 })
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt: userRequest } = await request.json()
+    const {prompt: userRequest} = await request.json()
     const projectId = process.env.SANITY_PROJECT_ID || 'uhpaa149'
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured' },
-        { status: 500, headers: corsHeaders }
+        {error: 'OpenAI API key not configured'},
+        {status: 500, headers: corsHeaders},
       )
     }
 
@@ -123,21 +151,18 @@ export async function POST(request: NextRequest) {
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o',
-      messages: [{ role: 'user', content: fullPrompt }],
+      messages: [{role: 'user', content: fullPrompt}],
       temperature: 0,
     })
 
     const groqQuery = completion.choices[0]?.message?.content?.trim()
-    
-    return NextResponse.json(
-      { query: groqQuery },
-      { headers: corsHeaders }
-    )
+
+    return NextResponse.json({query: groqQuery}, {headers: corsHeaders})
   } catch (error) {
     console.error('Error generating GROQ query:', error)
     return NextResponse.json(
-      { error: 'Failed to generate GROQ query. Check your Sanity configuration.' },
-      { status: 500, headers: corsHeaders }
+      {error: 'Failed to generate GROQ query. Check your Sanity configuration.'},
+      {status: 500, headers: corsHeaders},
     )
   }
 }

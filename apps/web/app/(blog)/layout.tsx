@@ -54,7 +54,7 @@ const inter = Inter({
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   let data
-  
+
   try {
     const result = await liveSanityFetch({query: settingsQuery})
     data = result.data
@@ -63,7 +63,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
     // Fallback to regular fetch
     data = await sanityFetch({query: settingsQuery})
   }
-  
+
   const footer = data?.footer || []
   const {isEnabled: isDraftMode} = await draftMode()
 
