@@ -26,14 +26,14 @@ export default defineConfig({
           process.env.SANITY_STUDIO_PREVIEW_URL ||
           (process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000'
-            : 'https://glowing-engine.netlify.app'),
+            : 'https://glowing-engine.netlify.app'), //'https://glowing-engine-web.vercel.app'),
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
       },
       allowOrigins: [
         'http://localhost:3000',
-        'https://glowing-engine-web.vercel.app',
+        // 'https://glowing-engine-web.vercel.app',
         'https://glowing-engine.netlify.app',
       ],
     }),
