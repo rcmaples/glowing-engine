@@ -6,5 +6,5 @@ export default defineCliConfig({
     dataset: 'glowing-engine',
   },
   studioHost: 'glowing-engine',
-  autoUpdates: true,
+  autoUpdates: false,
 })
