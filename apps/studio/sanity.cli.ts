@@ -2,7 +2,7 @@ import {defineCliConfig} from 'sanity/cli'
 
 export default defineCliConfig({
   api: {
-    projectId: 'uhpaa149',
+    projectId: 'mrsdi6mo',
     dataset: 'glowing-engine',
   },
   studioHost: 'glowing-engine',

@@ -135,7 +135,7 @@ const openai = new OpenAI({
 export async function POST(request: NextRequest) {
   try {
     const {prompt: userRequest} = await request.json()
-    const projectId = process.env.SANITY_PROJECT_ID || 'uhpaa149'
+    const projectId = process.env.SANITY_PROJECT_ID || 'mrsdi6mo'
 
     if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(

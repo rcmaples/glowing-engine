@@ -11,7 +11,7 @@ export default defineConfig({
   name: 'glowing-engine',
   title: 'Glowing Engine',
 
-  projectId: 'uhpaa149',
+  projectId: 'mrsdi6mo',
   dataset: 'glowing-engine',
 
   plugins: [
